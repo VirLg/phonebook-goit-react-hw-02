@@ -1,5 +1,5 @@
 import React from "react";
-// import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component{
 state={
@@ -65,15 +65,14 @@ render(){
              
     </form>
     )
- 
- 
- 
- 
- 
         
 }
 }
 
-
+Form.propTypes={
+    
+    name: PropTypes.string.isRequired,
+    number:PropTypes.string.isRequired,
+}
 
 export default Form

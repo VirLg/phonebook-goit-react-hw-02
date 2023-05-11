@@ -2,6 +2,7 @@ import './App.css';
 import React from "react";
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import PropTypes from 'prop-types';
 
 import {Section} from './components/Section/Section';
 import {Contact} from './components/Contats/Contact';
@@ -48,14 +49,12 @@ addNewContact=(data)=>{
     })) 
 }
 
-DeleteContact=ContactId=>{
-
-    console.log(ContactId);
+DeleteContact=ContactId=>{   
     this.setState(prevState=>({
-contacts:prevState.contacts.filter(el=>ContactId!==el.id)
+    contacts:prevState.contacts.filter(el=>ContactId!==el.id)
 
-}))
-}
+    }))
+    }
 
 handleSearchInput=evt=>{
         
@@ -67,11 +66,11 @@ handleSearchInput=evt=>{
 
 
 render(){
-const {filter="",contacts}=this.state;
+    const {filter="",contacts}=this.state;
 
-const visibleContacts=contacts.filter(el=>el.name.includes(filter))
+    const visibleContacts=contacts.filter(el=>el.name.toLowerCase().includes(filter.toLowerCase()))
 
-// contacts.filter(el=>el.name.includes(filter))
+
 
         return(
 
@@ -85,13 +84,13 @@ const visibleContacts=contacts.filter(el=>el.name.includes(filter))
 
 
 
-<Section>
-<h2>Contacts</h2>
-<Filter value={filter} onChange={this.handleSearchInput}/>    
+    <Section>
+    <h2>Contacts</h2>
+    <Filter value={filter} onChange={this.handleSearchInput}/>    
     <Contact  
     contacts={visibleContacts} 
     onDeleteContact={this.DeleteContact}/>
-</Section>
+    </Section>
 
    
          </>
@@ -99,7 +98,13 @@ const visibleContacts=contacts.filter(el=>el.name.includes(filter))
     }
 }
 
+App.propTypes={
+    
+    contacts: PropTypes.array.isRequired,
+    filter:PropTypes.string.isRequired,
 
+
+}
 
 export default App;
 

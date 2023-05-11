@@ -2,9 +2,8 @@
 
 export const Contact=function({contacts, onDeleteContact}){
 
-
-
-return(<ul>{contacts.map(({id,name,number})=>
+return(<ul>
+    {contacts.map(({id,name,number})=>
     
     <li key={id}>
         <span>{name}</span> 
