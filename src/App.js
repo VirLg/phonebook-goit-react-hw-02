@@ -2,7 +2,7 @@ import './App.css';
 import React from "react";
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import PropTypes from 'prop-types';
+
 
 import {Section} from './components/Section/Section';
 import {Contact} from './components/Contats/Contact';
@@ -29,11 +29,8 @@ formSubmitHendler=(data)=>{
     const state=this.state.contacts.find(el=>el.name===data.name)
             if(state){
         return Notify.failure("Sorry, this contact already in your list.");
-    }else{
-    
+    } 
     this.addNewContact(data)
-
-}
 }
 
 addNewContact=(data)=>{
@@ -49,7 +46,7 @@ addNewContact=(data)=>{
     })) 
 }
 
-DeleteContact=ContactId=>{   
+deleteContact=ContactId=>{   
     this.setState(prevState=>({
     contacts:prevState.contacts.filter(el=>ContactId!==el.id)
 
@@ -70,8 +67,6 @@ render(){
 
     const visibleContacts=contacts.filter(el=>el.name.toLowerCase().includes(filter.toLowerCase()))
 
-
-
         return(
 
          <>
@@ -89,7 +84,7 @@ render(){
     <Filter value={filter} onChange={this.handleSearchInput}/>    
     <Contact  
     contacts={visibleContacts} 
-    onDeleteContact={this.DeleteContact}/>
+    onDeleteContact={this.deleteContact}/>
     </Section>
 
    
@@ -98,13 +93,7 @@ render(){
     }
 }
 
-App.propTypes={
-    
-    contacts: PropTypes.array.isRequired,
-    filter:PropTypes.string.isRequired,
 
-
-}
 
 export default App;
 
